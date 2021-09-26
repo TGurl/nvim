@@ -25,14 +25,15 @@ opt.clipboard = 'unnamedplus'
 opt.showmatch = true
 opt.foldmethod = 'marker'
 opt.colorcolumn = '80'
+opt.spelllang = 'en_us'
 
 -- set colorscheme
 -- colorscheme onedark
 -- cmd 'colorscheme onedark'
 -- cmd 'colorscheme palenight'
-cmd 'colorscheme ayu'
+-- cmd 'colorscheme ayu'
 -- cmd 'colorscheme gruvbox'
--- cmd 'colorscheme vim-one'
+cmd 'colorscheme one'
 -- cmd 'colorscheme oceanic-next'
 
 g['lightline'] = {colorscheme = 'one'}
@@ -95,3 +96,5 @@ g.intentLine_char = '|'
 -- disable IndentLine for markdown files (avoid concealing)
 cmd[[autocmd FileType markdown let g:indentLine_enabled=0]]
 
+-- set max linelength to 80 for markdown files
+cmd[[au BufRead,BufNewFile *.md setlocal textwidth=80]]

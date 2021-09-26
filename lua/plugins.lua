@@ -13,6 +13,10 @@ return require('packer').startup(function()
     config = function() require'nvim-tree'.setup {} end
   }
   use {'itchyny/lightline.vim'}
+  use { 
+    'alvarosevilla95/luatab.nvim', 
+    requires='kyazdani42/nvim-web-devicons'
+  }
 
   -- colorschemes
   use {'joshdick/onedark.vim'}
