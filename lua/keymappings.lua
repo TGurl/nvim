@@ -1,17 +1,24 @@
 -- Keymap settings --
---
+
+local map = vim.api.nvim_set_keymap
+local dopts = {noremap = true, silent = true}
+local nopts = {noremap = true, silent = false}
+
 -- set space as leader key
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', { noremap = true , silent = true })
-vim.g.mapleader = ' '
+-- map('n', '<Space>', '<NOP>', opts)
+-- vim.g.mapleader = ' '
 
 -- no hl
-vim.api.nvim_set_keymap('n', '<Leader>h', ':set hlsearch!<CR>', { noremap = true , silent = true })
+map('n', '<Leader>h', ':set hlsearch!<CR>', dopts)
 
 -- toggle nvim-tree
-vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', { noremap = true , silent = true })
+map('n', '<Leader>e', ':NvimTreeToggle<CR>', dopts)
 
 -- enable CTRL+S
-vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('i', '<C-s>', ':w<CR>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('v', '<C-s>', ':w<CR>', { noremap = true, silent = false })
+map('n', '<C-s>', ':w<CR>', nopts)
+map('i', '<C-s>', ':w<CR>', nopts)
+map('v', '<C-s>', ':w<CR>', nopts)
 
+-- fast saving with <leader> and s
+map('n', '<leader>s', ':w<CR>', dopts)
+map('i', '<leader>s', '<C-c>:w<CR>', dopts)

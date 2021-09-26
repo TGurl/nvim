@@ -5,63 +5,93 @@ end
 
 -- helper functions --
 local cmd = vim.cmd
+local exec = vim.api.nvim_exec
 local fn = vim.fn
 local g = vim.g
+local opt = vim.opt
 
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
-local function opt(scope, key, value)
+local function opts(scope, key, value)
 	scopes[scope][key] = value
 	if scope ~= 'o' then scopes['o'][key] = value end
 end
 
 local indent = 2;
 
+--  general settings
+g.mapleader = ','
+opt.mouse = 'a'
+opt.clipboard = 'unnamedplus'
+opt.showmatch = true
+opt.foldmethod = 'marker'
+opt.colorcolumn = '80'
+
 -- set colorscheme
 -- colorscheme onedark
-cmd 'colorscheme onedark'
+-- cmd 'colorscheme onedark'
 -- cmd 'colorscheme palenight'
--- cmd 'colorscheme ayu'
+cmd 'colorscheme ayu'
 -- cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme vim-one'
 -- cmd 'colorscheme oceanic-next'
 
+g['lightline'] = {colorscheme = 'one'}
 
--- local to buffer options --
-opt('b', 'tabstop', indent)
-opt('b', 'softtabstop', indent)
-opt('b', 'shiftwidth', indent)
-opt('b', 'expandtab', true)
-opt('b', 'smartindent', true)
-opt('b', 'swapfile', false)
+-- local to buffer optsions --
+opts('b', 'tabstop', indent)
+opts('b', 'softtabstop', indent)
+opts('b', 'shiftwidth', indent)
+opts('b', 'expandtab', true)
+opts('b', 'smartindent', true)
+opts('b', 'swapfile', false)
 
--- local to window options --
-opt('w', 'signcolumn', 'yes')
-opt('w', 'number', true)
-opt('w', 'relativenumber', false)
-opt('w', 'list', true)
-opt('w', 'wrap', false)
+-- local to window optsions --
+opts('w', 'signcolumn', 'yes')
+opts('w', 'number', true)
+opts('w', 'relativenumber', false)
+opts('w', 'list', true)
+opts('w', 'wrap', true)
 
--- global options --
-opt('o', 'hlsearch', true)
-opt('o', 'incsearch', true)
-opt('o', 'hidden', true)
-opt('o', 'errorbells', false)
-opt('o', 'completeopt', 'menuone,noinsert,noselect')
-opt('o', 'ignorecase', true)
-opt('o', 'smartcase', true)
-opt('o', 'splitbelow', true)
-opt('o', 'splitright', true)
-opt('o', 'termguicolors', true)
-opt('o', 'wildmode', 'list:longest')
-opt('o', 'backup', false)
-opt('o', 'undodir', '~/.local/share/nvim/undodir')
-opt('o', 'undofile', true)
-opt('o', 'scrolloff', 8)
-opt('o', 'sidescrolloff', 8)
-opt('o', 'joinspaces', false)
-opt('o', 'showmode', false)
-opt('o', 'background', 'dark')
+-- global optsions --
+opts('o', 'hlsearch', true)
+opts('o', 'incsearch', true)
+opts('o', 'hidden', true)
+opts('o', 'errorbells', false)
+opts('o', 'completeopt', 'menuone,noinsert,noselect')
+opts('o', 'ignorecase', true)
+opts('o', 'smartcase', true)
+opts('o', 'splitbelow', true)
+opts('o', 'splitright', true)
+opts('o', 'termguicolors', true)
+opts('o', 'wildmode', 'list:longest')
+opts('o', 'backup', false)
+opts('o', 'undodir', '~/.local/share/nvim/undodir')
+opts('o', 'undofile', true)
+opts('o', 'scrolloff', 8)
+opts('o', 'sidescrolloff', 8)
+opts('o', 'joinspaces', false)
+opts('o', 'showmode', false)
+opts('o', 'background', 'dark')
 
 -- mappings --
 --local vimp = require('vimp')
 --vimp.bind('nvo', 'Y', 'y$')
+
+-- don't auto commenting new lines
+cmd[[au BufEnter * set fo-=c fo -=r fo-=o]]
+
+-- remove line length marker for selected filetypes
+cmd[[autocmd FileType text,markdown,xml,html,xhtml,javascript setlocal cc=0]]
+
+--2 spaced for selected filetypes
+cmd[[
+  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,python setlocal shiftwidth=2 tabstop=2
+]]
+
+-- Indentline
+-- g.indentLine_setColors = 0
+g.intentLine_char = '|'
+
+-- disable IndentLine for markdown files (avoid concealing)
+cmd[[autocmd FileType markdown let g:indentLine_enabled=0]]
+
