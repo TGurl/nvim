@@ -73,6 +73,7 @@ opts('o', 'sidescrolloff', 8)
 opts('o', 'joinspaces', false)
 opts('o', 'showmode', false)
 opts('o', 'background', 'dark')
+-- opts('o', 'filetype plugin', 'on')
 
 -- mappings --
 --local vimp = require('vimp')
@@ -98,3 +99,9 @@ cmd[[autocmd FileType markdown let g:indentLine_enabled=0]]
 
 -- set max linelength to 80 for markdown files
 cmd[[au BufRead,BufNewFile *.md setlocal textwidth=80]]
+
+-- turn on filetype plugin
+cmd[[autocmd filetype plugin on]]
+
+-- deoplete settings
+cmd[[let g:deoplete#enable_at_startup=0]]

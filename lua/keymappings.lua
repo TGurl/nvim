@@ -30,3 +30,9 @@ map('i', '<F11>', '<C-O>:set spell!<CR>', dopts)
 -- switch tabs
 map('n', '<TAB>', ':tabnext<CR>', dopts)
 map('n', '<S-TAB>', ':tabprevious<CR>', dopts)
+
+-- move around splits using Ctrl + {h,j,k,l}
+map('n', '<C-h>', '<C-w>h', dopts)
+map('n', '<C-j>', '<C-w>j', dopts)
+map('n', '<C-k>', '<C-w>k', dopts)
+map('n', '<C-l>', '<C-w>l', dopts)
